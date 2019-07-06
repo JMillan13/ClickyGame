@@ -9,7 +9,8 @@ class App extends Component {
   state = {
     characters: Characters,
     clickedCharacters: [],
-    points: 0
+    points: 0,
+    topScore: 0,
   };
 
   removecharacter = id => {
@@ -32,18 +33,28 @@ class App extends Component {
     })
   )
 
+  checkHighScore = () => {
+    const {points, topScore} = this.state;
+    if (points > topScore) {
+      this.setState({topScore: points});
+    }
+  }
+
   handleClick = (id) => {
-    const { clickedCharacters, points } = this.state
+    const { clickedCharacters, points, topScore } = this.state;
+
     if(clickedCharacters.includes(id)){
       alert("You lost.")
       this.resetGame()
       this.shuffleCharacters()
       return false
-    }
+    };
+
     this.setState({
       points: points + 1,
-      clickedCharacters: [...clickedCharacters, id]
-    })
+      clickedCharacters: [...clickedCharacters, id],
+    }, () => this.checkHighScore())
+
     this.shuffleCharacters()
     if(clickedCharacters.length + 1 === 12){
       alert('You Won!')
@@ -54,9 +65,10 @@ class App extends Component {
 
   // Map over this.state.characters and render a characterCard component for each character object
   render() {
+    const {points, topScore} = this.state;
     return (
       <Wrapper>
-        <MyNav score={this.state.points} topScore={12}/>
+        <MyNav score={points} topScore={topScore} />
         {this.state.characters.map(character => (
           <CharacterCard
             clickHandler={() => this.handleClick(character.id)}
