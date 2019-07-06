@@ -23,7 +23,7 @@ class App extends Component {
       <Wrapper>
         <MyNav score={0} topScore={12}/>
         {this.state.characters.map(character => (
-          <characterCard
+          <CharacterCard
             removecharacter={this.removecharacter}
             id={character.id}
             key={character.id}
