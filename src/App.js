@@ -7,7 +7,9 @@ import Characters from "./characters.json";
 class App extends Component {
   // Setting this.state.characters to the characters json array
   state = {
-    characters: Characters
+    characters: Characters,
+    clickedCharacters: [],
+    points: 0
   };
 
   removecharacter = id => {
@@ -17,20 +19,51 @@ class App extends Component {
     this.setState({ characters });
   };
 
+  shuffleCharacters = () => {
+    this.setState({
+      characters: this.state.characters.sort(() => Math.random() - 0.5)
+    })
+  }
+
+  resetGame = () => (
+    this.setState({
+      clickedCharacters: [],
+      points: 0
+    })
+  )
+
+  handleClick = (id) => {
+    const { clickedCharacters, points } = this.state
+    if(clickedCharacters.includes(id)){
+      alert("You lost.")
+      this.resetGame()
+      this.shuffleCharacters()
+      return false
+    }
+    this.setState({
+      points: points + 1,
+      clickedCharacters: [...clickedCharacters, id]
+    })
+    this.shuffleCharacters()
+    if(clickedCharacters.length + 1 === 12){
+      alert('You Won!')
+      this.resetGame()
+      return false
+    }
+  }
+
   // Map over this.state.characters and render a characterCard component for each character object
   render() {
     return (
       <Wrapper>
-        <MyNav score={0} topScore={12}/>
+        <MyNav score={this.state.points} topScore={12}/>
         {this.state.characters.map(character => (
           <CharacterCard
-            removecharacter={this.removecharacter}
+            clickHandler={() => this.handleClick(character.id)}
             id={character.id}
             key={character.id}
             name={character.name}
             image={character.image}
-            occupation={character.occupation}
-            location={character.location}
           />
         ))}
       </Wrapper>
