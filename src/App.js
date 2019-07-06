@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CharacterCard from "./components/characterCard";
+import CharacterCard from "./components/CharacterCard";
 import Wrapper from "./components/Wrapper";
 import MyNav from "./components/MyNav";
 import Characters from "./characters.json";
@@ -7,7 +7,7 @@ import Characters from "./characters.json";
 class App extends Component {
   // Setting this.state.characters to the characters json array
   state = {
-    characters
+    characters: Characters
   };
 
   removecharacter = id => {
