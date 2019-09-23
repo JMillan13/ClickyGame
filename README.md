@@ -7,7 +7,7 @@ Overview:
 
 
 
-In 2013, the developers at Facebook released React, a library that addresses this performance issue using the concept of a virtual DOM, an in-memory representation of the DOM that only updates nodes that have changed and not the entire DOM itself. In addition to improvements in user experience, React speeds up the development workflow as we can break our user interface into reusable components and, with the possible exception of JSX, write our components entirely in JavaScript without the need to learn the particular syntax of a template engine. React was quickly adopted by companies large and small and continues to gain in popularity as the library matures.
+In 2013, the developers at Facebook released React, a library that addresses this performance issue using the concept of a virtual DOM. an in-memory representation of the DOM that only updates nodes that have changed and not the entire DOM itself. In addition to improvements in user experience, React speeds up the development workflow as we can break our user interface into reusable components and, with the possible exception of JSX, write our components entirely in JavaScript without the need to learn the particular syntax of a template engine. React was quickly adopted by companies large and small and continues to gain in popularity as the library matures.
 
 Key Topics:
 
